@@ -107,18 +107,21 @@ class HomePage extends StatelessWidget {
     return SafeArea(
       child: Stack(
         children: [
-          Positioned(
-            top: 12,
-            right: 0,
-            height: 75,
-            child: Image.asset('assets/oc_logo.png'),
-          ),
           Column(
             children: [
+              Positioned(
+                top: 12,
+                right: 0,
+                child: SizedBox(
+                  width: 100,
+                  height: 100,
+                  child: Image.asset('assets/oc_logo.png'),
+                ),
+              ),
               const Spacer(flex: 3),
               _weatherSymbol(weather),
               const Spacer(flex: 1),
-              _temperatureWidget(weather),c
+              _temperatureWidget(weather),
               const Spacer(flex: 3),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
