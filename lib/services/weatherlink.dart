@@ -2,15 +2,6 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../model/weather.dart';
 
-// class Weatherlink {
-//   final httpClient = http.Client();
-
-//   Future<Weather> getWeather() async {
-//     final httpPayload = <String, dynamic>{};
-//     return Weather.fromWeatherlink(httpPayload);
-//   }
-// }
-
 class Weatherlink {
   static const String _apiUrl =
       "https://us-central1-oc-weather-25.cloudfunctions.net/weather";
@@ -21,6 +12,7 @@ class Weatherlink {
 
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = jsonDecode(response.body);
+        print(data);
         return Weather.fromWeatherlink(data);
       } else {
         print(
