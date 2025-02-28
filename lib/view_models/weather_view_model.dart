@@ -10,6 +10,37 @@ class WeatherViewModel extends ChangeNotifier {
   String? errorMessage;
 
   IconData get icon {
+    if (_weatherData == null) return Icons.wb_sunny_outlined;
+
+    final temp = _weatherData!.temperature;
+
+    if (temp >= 85) {
+      return Icons.wb_sunny;
+    }
+
+    if (temp <= 32) {
+      return Icons.ac_unit;
+    }
+
+    if (humidity > 80 && temp > 32 && temp < 75) {
+      if (windSpeed > 15) {
+        return Icons.thunderstorm;
+        return Icons.water_drop;
+      }
+    }
+
+    if (windSpeed > 20) {
+      return Icons.air;
+    }
+
+    if (humidity > 60 && humidity <= 80) {
+      return Icons.cloud;
+    }
+
+    if (temp > 60 && temp < 85) {
+      return Icons.cloud_queue;
+    }
+
     return Icons.wb_sunny_outlined;
   }
 
@@ -22,7 +53,24 @@ class WeatherViewModel extends ChangeNotifier {
   }
 
   String get windDirection {
-    return _weatherData?.windDirection ?? "N/A";
+    if (_weatherData?.windDirection == null) return "N/A";
+
+    final Map<String, String> directionArrows = {
+      'N': '↓',
+      'NE': '↙',
+      'E': '←',
+      'SE': '↖',
+      'S': '↑',
+      'SW': '↗',
+      'W': '→',
+      'NW': '↘',
+      'Variable': '↔',
+    };
+
+    final direction = _weatherData!.windDirection;
+    final arrow = directionArrows[direction] ?? '';
+
+    return "$arrow $direction";
   }
 
   int get windSpeed {
